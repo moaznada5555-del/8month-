@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>حكايتنا | ٨ شهور من الصحبة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <div class="floating-roses" id="floatingRoses"></div>
+
+    <!-- الترويسة -->
+    <header class="hero-section">
+        <div class="container">
+            <div class="main-badge">🌸 بمناسبة ٨ شهور من الصحبة الحلوة 🌸</div>
+            <h1 class="main-title">٨ شهور... وأنتِ أحلى صدفة.</h1>
+            <p class="main-subtitle">من أول كلمة لكل ضحكة، لكل حكاية.. دي هدية صغيرة لهدية ليه مكان كبير في قلبي.</p>
+            <button id="scrollToUnlock" class="btn-primary" style="margin-top: 15px;">افتحي حكايتنا ✨</button>
+        </div>
+    </header>
+
+    <!-- بوابة التاريخ الماسي -->
+    <section class="section date-gate-section">
+        <div class="container">
+            <div class="card lock-card">
+                <h2>🔒 فاكرة أول يوم؟</h2>
+                <p>اكتبي تاريخ أول مرة اتكلمنا فيها مع بعض (21/2/2026):</p>
+                <div class="date-input-group">
+                    <input type="text" id="dateInput" placeholder="DD/MM/YYYY" value="21/2/2026" />
+                    <button id="unlockBtn" class="btn-primary">افتحي الذكريات 🌸</button>
+                </div>
+                <div id="dateErrorMessage" class="error-message hidden">التاريخ غير صحيح! تأكدي من كتابته بالشكل الصحيح.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- المحتوى الرئيسي (يفتح بعد التاريخ) -->
+    <div id="mainContent" class="hidden">
+
+        <!-- لوحة التحكم الخاصة بك لرفع الصور والفيديوهات والأغنية -->
+        <section class="section admin-control-section" style="background: #fff0f3; padding: 20px 0; border-bottom: 2px dashed var(--primary-color);">
+            <div class="container">
+                <div class="card" style="border: 2px solid var(--primary-color);">
+                    <h3 style="color: var(--primary-color); margin-bottom: 10px;">⚙️ لوحة تحكم المالك (أنت فقط)</h3>
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">من هنا يمكنك رفع وتحميل الصور، الفيديوهات، والأغنية وتخصيصها فوراً:</p>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        <div>
+                            <label style="font-weight: bold; display: block; margin-bottom: 5px;">🎵 رفع أغنية الموقع (MP3):</label>
+                            <input type="file" id="uploadMusic" accept="audio/mp3,audio/*" />
+                        </div>
+                        <div>
+                            <label style="font-weight: bold; display: block; margin-bottom: 5px;">🖼️ إضافة صور جديدة للمعرض:</label>
+                            <input type="file" id="uploadImages" accept="image/*" multiple />
+                        </div>
+                        <div>
+                            <label style="font-weight: bold; display: block; margin-bottom: 5px;">🎬 إضافة فيديوهات جديدة للمعرض:</label>
+                            <input type="file" id="uploadVideos" accept="video/*" multiple />
+                        </div>
+                        <button id="resetMediaBtn" class="btn-secondary" style="width: fit-content; font-size: 0.85rem; padding: 6px 12px;">إعادة ضبط الوسائط الافتراضية</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. رسالة البداية -->
+        <section class="section">
+            <div class="container">
+                <div class="card text-center">
+                    <h3 style="color: var(--primary-color); margin-bottom: 10px;">١ - بداية الحكاية</h3>
+                    <p style="font-size: 1.1rem; color: #555; max-width: 700px; margin: 0 auto;">
+                        يومها ما كناش نعرف إن كلمة بسيطة هتبقى بداية لكل الصحبة دي. ودلوقتي، بعد ٨ شهور، بقولك: أنا ممكن لكل لحظة جمعتنا.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. المعرض (يعرض الصور والفيديوهات التي قمت برفعها) -->
+        <section class="section gallery-section">
+            <div class="container">
+                <h3 class="section-header">٢ - لحظاتنا الحلوة</h3>
+                <p class="section-desc">صور وذكريات.. وكل واحدة فيهم ليها حكاية.</p>
+                
+                <div class="gallery-tabs">
+                    <button class="tab-link active" data-type="images">الصور المحملة</button>
+                    <button class="tab-link" data-type="videos">الفيديوهات المحملة</button>
+                </div>
+
+                <div id="imagesGrid" class="media-grid"></div>
+                <div id="videosGrid" class="media-grid hidden"></div>
+            </div>
+        </section>
+
+        <!-- 3. مشغل الموسيقى -->
+        <section class="section music-section">
+            <div class="container">
+                <div class="card music-card-design">
+                    <h3 style="color: var(--primary-color); margin-bottom: 5px;">٣ - لصوتنا تشبهنا</h3>
+                    <p class="section-desc" style="margin-bottom: 20px;">شغليها.. وخلي الذكريات تليق بموسيقى.</p>
+                    
+                    <div class="vinyl-container" id="vinylContainer">
+                        <div class="vinyl-record">
+                            <div class="vinyl-label"><span>🎵</span></div>
+                        </div>
+                    </div>
+
+                    <div class="song-details">
+                        <h4>يا صاحبتي</h4>
+                        <small>أغنية أصلية عملناها لصحبتنا</small>
+                    </div>
+
+                    <div class="audio-player-wrapper">
+                        <audio id="audioElement"></audio>
+                        <div class="player-controls">
+                            <button id="playPauseBtn" class="play-circle-btn">▶</button>
+                        </div>
+                        <div class="time-progress">
+                            <span id="currentTime">0:00</span>
+                            <div class="progress-bar-container" id="progressBarContainer">
+                                <div id="progressBar" class="progress-bar"></div>
+                            </div>
+                            <span id="durationTime">1:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. لعبة الأسئلة -->
+        <section class="section game-section">
+            <div class="container">
+                <div class="card game-card">
+                    <h3 style="color: var(--primary-color);">٤ - نلعب سوا؟</h3>
+                    <p class="section-desc">قَد إيه عارفين بعض؟ ١٠ حاجات صغيرة.. تقول إننا قريبين.</p>
+
+                    <div class="player-switcher">
+                        <button class="player-btn active" id="btnPlayer1">أنا (معاذ)</button>
+                        <button class="player-btn" id="btnPlayer2">صديقتي</button>
+                    </div>
+
+                    <form id="answersForm">
+                        <div id="questionsInputList" class="questions-input-list"></div>
+                        <div class="form-actions" style="margin-top: 25px;">
+                            <button type="submit" class="btn-success">💾 حفظ الإجابات محلياً</button>
+                            <button type="button" id="exportBtn" class="btn-secondary">📥 تحميل الإجابات (JSON)</button>
+                            <label class="btn-outline file-label">
+                                📤 استيراد إجابات
+                                <input type="file" id="importInput" accept=".json" class="hidden-file-input" />
+                            </label>
+                        </div>
+                    </form>
+                    <div id="gameStatus" class="status-text"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. الرسالة الختامية -->
+        <section class="section final-message-section">
+            <div class="container">
+                <div class="card text-center" style="border: 2px solid var(--accent-color);">
+                    <h3 style="color: var(--primary-color); margin-bottom: 15px;">الصديقة الصدوقة،</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: #444; margin-bottom: 20px;">
+                        «بحبك يا صديقتي الصدوقة؛ إنتِ مش بس صاحبتي، إنتِ الضحكة اللي بيهون اليوم، والقلب اللي بلاقي عنده راحتي.»<br>
+                        ٨ شهور من معرفتنا ببعض.. وكل يوم بيثبت لي إنك من أجمل الصدف اللي حصلتلي.<br>
+                        ولسه قدامنا حكايات كتير حلوة.
+                    </p>
+                    <p style="font-weight: bold; color: var(--primary-color);">❤️ دمتِ لي أحسن وأجمل صديقة ❤️</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox hidden">
+        <span class="close-lightbox" id="closeLightbox">&times;</span>
+        <img class="lightbox-img" id="lightboxImg" src="" alt="عرض كبير">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
